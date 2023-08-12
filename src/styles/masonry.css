@@ -1,8 +1,10 @@
 .gallery {
   display: flex;
   justify-content: center;
+  gap: 0.5rem;
   width: 100vw;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .item img {

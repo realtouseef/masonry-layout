@@ -13,14 +13,19 @@ The Masonry Component takes in 3 params `data, width, column`
 ### How to use
 
 ```jsx
-import { Masonry } from '@tx666/masonry';
+import { Masonry } from '@tx666/masonry'
+import '@tx666/masonry/dist/masonry.css'
 
 const Gallery = () => {
-  const data = [{ src: 'link to your image' }, { src: 'link to your image' }];
-  return <Masonry data={data} column={5} width={30} />;
-};
+  const data = [{ src: 'link to your image' }, { src: 'link to your image' }]
+  return <Masonry data={data} column={5} width={30} />
+}
 ```
 
 ### Features in mind
 
 When you resize the window, the columns should be adjusted like on sm, md, lg, xl, 2xl they should 2, 3, 4, 5, 6 or however you pass the number of columns you want in respective screens
+
+## Issue
+
+If you find any issues or bugs, please report them <a href='https://github.com/realtouseef/masonry-layout/issues'>here</a>.
