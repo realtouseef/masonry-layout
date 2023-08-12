@@ -1,6 +1,6 @@
 # Masonry layout
 
-Pinterest like Masonry Layout built with React, Vite, Lodash.chunk, and CSS
+Pinterest like Masonry Layout built with React, TypeScript, Vite, Lodash.chunk, and CSS
 
 ## Masonry Component
 

@@ -1,11 +1,7 @@
 {
   "name": "@tx666/masonry",
   "private": false,
-  "version": "0.0.9",
-  "files": [
-    "dist/",
-    "dist/*.css"
-  ],
+  "version": "0.0.10",
   "type": "module",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -15,6 +11,17 @@
     "type": "git",
     "url": "https://github.com/realtouseef/masonry-layout"
   },
+  "files": [
+    "dist/",
+    "dist/*.css"
+  ],
+  "keywords": [
+    "masonry layout",
+    "masonry",
+    "react masonry",
+    "masonryjs",
+    "pinterest masonry"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "rm -rf dist/ && npm run copy:css && npm run build:esm && npm run build:cjs",
