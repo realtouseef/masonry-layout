@@ -1,0 +1,14 @@
+.gallery {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.item img {
+  width: 100%;
+  padding: 0.3rem;
+  border-radius: 1rem;
+}
