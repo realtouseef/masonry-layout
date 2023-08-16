@@ -3,7 +3,6 @@ import { chunk } from '../../utils';
 import './masonry.css';
 
 interface MasonryType {
-  width?: number;
   column: Breakpoint;
   data: {
     src: string;
@@ -11,58 +10,77 @@ interface MasonryType {
 }
 
 type Breakpoint = {
-  xs?: number;
-  sm?: number;
-  md?: number;
-  lg?: number;
-  xl?: number;
-  xxl?: number;
+  xs: number;
+  sm: number;
+  md: number;
+  lg: number;
+  xl: number;
+  xxl: number;
 };
 
 /**
  *
  * @param data array of object with src inside
  *
- * @param width sets the width of column
- *
  * @param column is the number used to create number of columns
  */
-const Masonry: React.FunctionComponent<MasonryType> = ({
-  data,
-  column,
-  width = 25,
-}) => {
+const Masonry: React.FunctionComponent<MasonryType> = ({ data, column }) => {
   const [currentColumn, setCurrentColumn] = useState<number>(4);
+  const [columnWidth, setColumnWidth] = useState<number>(0);
+
+  const handleColumns = () => {
+    const windowWidth = window.innerWidth;
+    let currentBreakpointColumns: number;
+    let currentBreakpointColumnWidth: number;
+
+    switch (true) {
+      case windowWidth < 640:
+        currentBreakpointColumns = column.xs;
+        currentBreakpointColumnWidth = 50;
+        break;
+      case windowWidth < 768:
+        currentBreakpointColumns = column.sm;
+        currentBreakpointColumnWidth = 50;
+        break;
+      case windowWidth < 1024:
+        currentBreakpointColumns = column.md;
+        currentBreakpointColumnWidth = 40;
+        break;
+      case windowWidth < 1280:
+        currentBreakpointColumns = column.lg;
+        currentBreakpointColumnWidth = 30;
+        break;
+      case windowWidth < 1536:
+        currentBreakpointColumns = column.xl;
+        currentBreakpointColumnWidth = 25;
+        break;
+      case windowWidth > 1536:
+        currentBreakpointColumns = column.xxl;
+        currentBreakpointColumnWidth = 25;
+        break;
+      default:
+        currentBreakpointColumns = column.md;
+        currentBreakpointColumnWidth = 40;
+        break;
+    }
+
+    setCurrentColumn(currentBreakpointColumns);
+    setColumnWidth(currentBreakpointColumnWidth);
+  };
 
   useEffect(() => {
-    const handleColumns = () => {
-      const windowWidth = window.innerWidth;
-
-      const currentBreakpointColumns =
-        column[
-          windowWidth < 640
-            ? 'xs'
-            : windowWidth < 768
-            ? 'sm'
-            : windowWidth < 1024
-            ? 'md'
-            : windowWidth < 1280
-            ? 'lg'
-            : windowWidth < 1536
-            ? 'xl'
-            : 'xxl'
-        ] || column.md;
-
-      setCurrentColumn(currentBreakpointColumns || 4);
-    };
-
     handleColumns();
-    const resizeColumn = () => handleColumns();
 
-    window.addEventListener('resize', resizeColumn);
+    window.addEventListener('resize', handleColumns);
 
-    return () => window.removeEventListener('resize', resizeColumn);
+    return () => window.removeEventListener('resize', handleColumns);
   }, [column]);
+
+  /**
+   * FIXME:
+   * find a better way to equally distribute the images
+   * so that each array has equal items
+   */
 
   /*
    * chunkSize helps in creating the number of columns
@@ -80,7 +98,7 @@ const Masonry: React.FunctionComponent<MasonryType> = ({
   return (
     <main className='gallery'>
       {distributed?.map((innerArray, rowIndex) => (
-        <div key={rowIndex} style={{ width: `${width}%` }}>
+        <div key={rowIndex} style={{ width: `${columnWidth}%` }}>
           {innerArray?.map((imageObj, columnIndex) => (
             <div key={columnIndex} className='item'>
               <img

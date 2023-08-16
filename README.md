@@ -1,30 +1,54 @@
-# Masonry layout
+# Masonry layout 📌
 
-Pinterest like Masonry Layout built with React, TypeScript, Lodash.chunk, and CSS
+Pinterest like Masonry Layout built with React, TypeScript, and CSS
 
 ## Masonry Component
 
-The Masonry Component takes in 3 params `data, width, column`
+The Masonry Component takes in 2 params `data, column`
 
 - Data is required and should be an array of object with `src` inside
-- width sets the the width of the column, defaults to 25%
-- column sets the number of columns you want, defaults to 4
+- column sets the number of columns you want, you can provide an object with the `xs, sm, md, lg, xl, xxl` and define the number of columns you want in each breakpoint.
+
+### Breakpoints & Width
+
+PS: if the innerWidth of the window is less than `640px` it is `xs`, same for the rest of the values and if the width is great than `1536px`, it is `xxl`.
+
+| breakpoints       | value | width |
+| ----------------- | ----- | ----- |
+| less than 640     | xs    | 50%   |
+| < 768             | sm    | 50%   |
+| < 1024            | md    | 40%   |
+| < 1280            | lg    | 30%   |
+| < 1536            | xl    | 25%   |
+| greater than 1536 | xxl   | 25%   |
+
+### Width
 
 ### How to use
 
+Provide an object with the number of columns you want to display in each breakpoint.
+
 ```jsx
 import { Masonry } from '@tx666/masonry';
-import '@tx666/masonry/dist/masonry.css';
 
 const Gallery = () => {
+  const columns = {
+    xs: 2,
+    sm: 2,
+    md: 3,
+    lg: 3,
+    xl: 4,
+    xxl: 5,
+  };
+
   const data = [{ src: 'link to your image' }, { src: 'link to your image' }];
-  return <Masonry data={data} column={5} width={30} />;
+  return <Masonry data={data} column={columns} />;
 };
 ```
 
-### Features in mind
+### TODOs
 
-When you resize the window, the columns should be adjusted like on sm, md, lg, xl, 2xl they should 2, 3, 4, 5, 6 or however you pass the number of columns you want in respective screens
+- find a better way to equally distribute the items in each array
 
 ## Issue
 
